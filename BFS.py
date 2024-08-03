@@ -30,9 +30,8 @@ def Adjacencyist(numberOfEdges):
     graph = []
     numberOfEdges = int(numberOfEdges)
     for i in range(numberOfEdges):
-        n = input('Enter the first node : ')
-        m = input('Enter the second node : ')
-        graph.append((n,m))
+        n = input('Enter the two nodes connected : ').split()
+        graph.append((n[0],n[1]))
     return graph
 
 def visualization(graph):
