@@ -1,11 +1,10 @@
 import pydotplus
 from IPython.display import Image, display
 import matplotlib.pyplot as plt
-def BFS(start,graph,goal):
-
-    visited : []
-    explored : [start]
-    frontier: []
+def BFS(start, graph, goal):
+    visited = [] 
+    explored = [start] 
+    frontier = []  
 
     while explored:
         i = explored.pop(0) 
@@ -13,15 +12,19 @@ def BFS(start,graph,goal):
         if i == goal:
             visited.append(i)
             return visited
+        
         for edge in graph:
             if edge[0] == i and edge[1] not in visited and edge[1] not in frontier:
                 frontier.append(edge[1])
+        
         if frontier:
             explored.append(frontier.pop(0))
             visited.append(i)
         else:
             visited.append(i)
-    return 'Fail'
+
+    return 'Search Failed' 
+
 
 def Adjacencyist(numberOfEdges):
     graph = []
