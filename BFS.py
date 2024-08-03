@@ -7,24 +7,21 @@ def BFS(start,graph,goal):
     explored : [start]
     frontier: []
 
-    for i in explored:
+    while explored:
+        i = explored.pop(0) 
 
-        for j in range(len(graph)):
-
-            if graph[j][0] == i & graph[j][1] in visited == False :
-
-                frontier.append(graph[j][1])
-
-        explored.append(frontier[0])
-
-        visited.append(explored[0])
-
-        explored = explored[1:]
-
-        frontier = frontier[1:]
-
-        if visited[-1] == goal:
+        if i == goal:
+            visited.append(i)
             return visited
+        for edge in graph:
+            if edge[0] == i and edge[1] not in visited and edge[1] not in frontier:
+                frontier.append(edge[1])
+        if frontier:
+            explored.append(frontier.pop(0))
+            visited.append(i)
+        else:
+            visited.append(i)
+    return 'Fail'
 
 def Adjacencyist(numberOfEdges):
     graph = []
