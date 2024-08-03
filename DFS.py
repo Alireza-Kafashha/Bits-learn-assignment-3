@@ -3,25 +3,17 @@ from IPython.display import Image, display
 import matplotlib.pyplot as plt
 def DFS(start, graph, goal):
     visited = [] 
-    explored = [start] 
-    frontier = []  
-
-    while explored:
-        i = explored.pop(0) 
-
-        if i == goal:
-            visited.append(i)
+    frontier = [start]  
+    while frontier:
+        explored = frontier.pop()
+        if explored == goal:
+            visited.append(explored)
             return visited
         
         for edge in graph:
-            if edge[0] == i and edge[1] not in visited and edge[1] not in frontier:
+            if edge[0] == explored and edge[1] not in visited and edge[1] not in frontier:
                 frontier.append(edge[1])
-        
-        if frontier:
-            explored.append(frontier.pop(-1))
-            visited.append(i)
-        else:
-            visited.append(i)
+        visited.append(explored)
 
     return 'Search Failed' 
 
@@ -44,7 +36,7 @@ def visualization(graph , dfs):
     img = plt.imread('graph.png')
     plt.imshow(img)
     plt.axis('off')  
-    plt.title(dfs)
+    plt.title(f'DFS = {dfs}')
     plt.show()
 
 
