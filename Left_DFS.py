@@ -1,22 +1,20 @@
 import pydotplus
 from IPython.display import Image, display
 import matplotlib.pyplot as plt
+
 def DFS(start, graph, goal):
     visited = [] 
-    frontier = [start]  
+    frontier = [start]
     while frontier:
         explored = frontier.pop()
+        visited.append(explored)  
         if explored == goal:
-            visited.append(explored)
             return visited
-        
-        for edge in graph:
+        for edge in reversed(graph):
             if edge[0] == explored and edge[1] not in visited and edge[1] not in frontier:
                 frontier.append(edge[1])
-        visited.append(explored)
 
-    return 'Search Failed' 
-
+    return 'Search Failed'
 
 def Adjacencyist(numberOfEdges):
     graph = []
@@ -26,7 +24,7 @@ def Adjacencyist(numberOfEdges):
         graph.append((n[0],n[1]))
     return graph
 
-def visualization(graph , dfs):
+def visualization(graph, dfs):
     plt.figure(figsize=(8,8))
     MyGraph = pydotplus.Dot(graph_type='digraph')  
     for edge in graph:
@@ -38,12 +36,10 @@ def visualization(graph , dfs):
     plt.title(f'DFS = {dfs}')
     plt.show()
 
-
 number_of_edges = int(input('Enter number of edges : '))
 starter = input('Enter the root : ')
 target = input('Enter the goal : ')
-
 graph = Adjacencyist(number_of_edges)
-dfs = DFS(starter,graph,target)
+dfs = DFS(starter, graph, target)
 print(dfs)
-visualization(graph , dfs)
+visualization(graph, dfs)
